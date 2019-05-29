@@ -1,0 +1,127 @@
+<div class="jumbotron cardclass">
+    <h1 class="display-6">{{dashboardtitle}}</h1>
+    <p class="lead">{{dashboardsubtitle}}</p>
+    <hr class="my-4">
+    <div class="row mx-3 my-3">
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="swing-in-top-fwd card bg-success text-white h-100">
+                <div class="card-body bg-success">
+                    <div class="rotate">
+                        <i class="material-icons">account_circle</i>
+                    </div>
+                    <h1 class="display-4">{{volunteers}}</h1>
+                    <h6 class="text-uppercase">{{_uniquevolunteers}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="swing-in-top-fwd card text-white bg-danger h-100">
+                <div class="card-body bg-danger">
+                    <div class="rotate">
+                        <i class="material-icons">alarm</i>
+                    </div>
+                    <h1 class="display-4">{{volunteeringhrs}}</h1>
+                    <h6 class="text-uppercase">{{_volunteeringhours}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="swing-in-top-fwd card text-white bg-info h-100">
+                <div class="card-body bg-info">
+                    <div class="rotate">
+                        <i class="material-icons">work</i>
+                    </div>
+                    <h1 class="display-4">{{bus}}</h1>
+                    <h6 class="text-uppercase">{{_businessunits}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="swing-in-top-fwd card text-white bg-warning h-100">
+                <div class="card-body">
+                    <div class="rotate">
+                        <i class="material-icons">business</i>
+                    </div>
+                    <h1 class="display-4">{{location}}</h1>
+                    <h6 class="text-uppercase">{{_locations}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cards end here-->
+</div>
+
+<div class="row chartdiv">
+    <div style="margin-bottom: 2%" class="col-md-4 col-sm-12">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{_businessunitpeople}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                        <canvas #canvas width="600" height="600">{{ buchart }}</canvas>
+            </mat-card-content>
+          </mat-card>
+    </div>
+    <div style="margin-bottom: 2%" class="col-md-4 col-sm-12">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{_locationevents}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                        <canvas #canvas1 width="600" height="600">{{ locationchart }}</canvas>
+            </mat-card-content>
+          </mat-card>
+    </div>
+    <div style="margin-bottom: 2%" class="col-md-4 col-sm-12">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{_projectevents}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                        <canvas #canvas2 width="600" height="600">{{ projectchart }}</canvas>
+            </mat-card-content>
+          </mat-card>
+    </div>
+  </div>
+
+  <div class="tablecls">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Top Contributors - Filter by ID or Name">
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="hours">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Volunteering Hours </th>
+          <td mat-cell *matCellDef="let row"> {{row.hours}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="frequency">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Participation Frequency </th>
+          <td mat-cell *matCellDef="let row"> {{row.frequency}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>

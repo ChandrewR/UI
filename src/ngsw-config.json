@@ -1,0 +1,46 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ],
+        "urls" : ["http://172.18.4.50/dashboardapi/v1/getvolunteers",
+                  "http://172.18.4.50/dashboardapi/v1/getlocationdata",
+                  "http://172.18.4.50/dashboardapi/v1/getoverallvolunteeringhrs",
+                  "http://172.18.4.50/dashboardapi/v1/getbudata"]
+      }
+    }, {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups" : [
+    {
+      "name" : "dashboard-api",
+      "urls" : ["http://172.18.4.50/dashboardapi/v1/getvolunteers",
+                "http://172.18.4.50/dashboardapi/v1/getlocationdata",
+                "http://172.18.4.50/dashboardapi/v1/getoverallvolunteeringhrs",
+                "http://172.18.4.50/dashboardapi/v1/getbudata"],
+      "cacheConfig" : {
+        "strategy" : "freshness",
+        "maxSize" : 20,
+        "maxAge" : "1h",
+        "timeout" : "5s"
+      }
+    }
+  ]
+}

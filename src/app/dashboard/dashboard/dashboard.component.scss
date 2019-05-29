@@ -1,0 +1,85 @@
+div {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cardclass {
+    margin: 1% auto;
+    width: 95%;
+}
+
+table {
+        width: 100%;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+.mat-form-field {
+        font-size: 14px;
+        width: 100%;
+}
+
+td, th {
+        width: 30%;
+    } 
+
+.tablecls {
+        margin: 2% auto;
+        width: 90%;
+    }
+
+/* .example-card {
+    margin: 1% auto;
+    max-width: 400px;
+}
+ */
+.chartdiv {
+    margin: 2% auto;
+    width: 95%;
+}
+   
+/*   .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+ */
+  .mat-card:not([class*=mat-elevation-z]) {
+    //box-shadow: 3px 4px 16px 1px #0039a6;
+    box-shadow: 3px 4px 16px 1px black;
+}
+
+.swing-in-top-fwd {
+	-webkit-animation: swing-in-top-fwd 2s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	        animation: swing-in-top-fwd 2s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+
+@-webkit-keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+              transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 1;
+    }
+  }
+  @keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+              transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 1;
+    }
+  }

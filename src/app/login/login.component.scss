@@ -1,0 +1,45 @@
+div {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login {
+    height : 60%;
+    margin: 10% auto;
+    width: 90%;
+    text-align: center
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    //box-shadow: 3px 4px 16px 1px #0039a6;
+    box-shadow: 3px 4px 16px 1px black;
+}
+
+.scale-in-center {
+	-webkit-animation: scale-in-center 1s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	        animation: scale-in-center 1s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+@-webkit-keyframes scale-in-center {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in-center {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }

@@ -1,0 +1,247 @@
+<div style="position: relative;right: 0%;text-align: right"><ngb-alert *ngIf="dangerMessage" type="danger" (close)="dangerMessage = null">{{ dangerMessage }}</ngb-alert></div>
+<div style="position: absolute;right: 0%"><ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert></div>
+
+<!-- <div class="accordiandiv">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Select criteria for report
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <mat-form-field>
+        <input matInput placeholder="First name">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Age">
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Self aware panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="tablecls">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+        
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+        
+            
+            <ng-container matColumnDef="progress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+              <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+            </ng-container>
+        
+            
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+        
+            
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+        
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+ -->
+<div class="matcarddiv">
+<form (ngSubmit) = 'previewReport(reportForm)' #reportForm>
+<mat-card class="outermatcard">
+<!--   <mat-card-header>
+    <mat-card-title>Generate Report</mat-card-title>
+    <mat-card-subtitle>Select input criteria to generate report </mat-card-subtitle>
+  </mat-card-header> -->
+  <div class="card">
+              
+  <h6 class="card-header">Generate Report</h6>
+  <div class="card-body"> 
+  <mat-card-content>
+    <mat-card>
+    
+        <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Event ID</mat-label>
+              <input matInput placeholder="Event ID" [formControl]="eventid">
+              <mat-error *ngIf="eventid.invalid">{{getEventIDErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field>
+                <mat-select placeholder="Business unit" [formControl]="buControl" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let bu of bus" [value]="bu">
+                    {{bu.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="buControl.hasError('required')">Please choose a business unit</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field>
+                <mat-select placeholder="Base Location" [formControl]="locationControl" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let location of locations" [value]="location">
+                    {{location.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="locationControl.hasError('required')">Please choose a location</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field>
+                <mat-select placeholder="Month" [formControl]="monthControl" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let month of months" [value]="month">
+                    {{month.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="monthControl.hasError('required')">Please choose a location</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="startpicker" placeholder="Start date">
+                <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+                <mat-datepicker #startpicker></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="endpicker" placeholder="End date">
+                <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+                <mat-datepicker #endpicker></mat-datepicker>
+              </mat-form-field>
+        </div>
+      </div>
+       
+    </mat-card>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button style="margin-left: 15px" type="submit" 
+    [disabled]="eventid.invalid || buControl.invalid || locationControl.invalid || monthControl.invalid" 
+    mat-raised-button color="primary">Preview report</button>
+  </mat-card-actions>
+  </div></div>
+  
+</mat-card>
+</form>
+</div>
+
+<div class="matcarddiv"><button class="my- 2 float-right" mat-raised-button (click)="generatePDF()" color="primary">Generate PDF</button></div>
+<div id="pdf" class="jumbotron matcarddiv">
+  <h3><strong>Participation and Engagement metrics</strong></h3>&nbsp;
+  <hr class="my-4">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Head count<div class="float-right badge badge-pill badge-primary">{{headcount}}</div></li>
+    <li class="list-group-item">Unique volunteers<div class="float-right badge badge-pill badge-primary">{{uniquevolunteers}}</div></li>
+    <li class="list-group-item">Total volunteering hours<div class="float-right badge badge-pill badge-primary">{{totalvolunteeringhours}}</div></li>
+    <li class="list-group-item">Coverage<div class="float-right badge badge-pill badge-primary">{{coverage}}</div></li>
+    <li class="list-group-item">Average frequency per volunteer<div class="float-right badge badge-pill badge-primary">{{avgfrequencypervolunteer}}</div></li>
+    <li class="list-group-item">Average hours per associate<div class="float-right badge badge-pill badge-primary">{{avghoursperassociate}}</div></li>
+    <li class="list-group-item">Average hours per volunteer<div class="float-right badge badge-pill badge-primary">{{avghourspervolunteer}}</div></li>
+    <li class="list-group-item">Total number of events<div class="float-right badge badge-pill badge-primary">{{events}}</div></li>
+    <li class="list-group-item">Average hours per event<div class="float-right badge badge-pill badge-primary">{{avghoursperevent}}</div></li>
+    <li class="list-group-item">Average number of volunteers attended per event<div class="float-right badge badge-pill badge-primary">{{avgnoofvolunteersattendedperevent}}</div></li>
+    <!-- <li class="list-group-item">Average hours volunteered per volunteer per event<div class="float-right badge badge-pill badge-primary">6</div></li> -->
+  </ul>
+
+  <div class="tablecls">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Top Contributors - Filter by ID or Name">
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="hours">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Volunteering Hours </th>
+          <td mat-cell *matCellDef="let row"> {{row.hours}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="frequency">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Participation Frequency </th>
+          <td mat-cell *matCellDef="let row"> {{row.frequency}} </td>
+        </ng-container>
+    
+        
+        
+    
+        
+        <!-- <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Count </th>
+          <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+        </ng-container> -->
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+
+  <div class="row chartdiv">
+    <div class="col-md-6 col-sm-12 chartdiv">
+      <div style="text-align: center">Business unit - People</div>
+        <canvas #canvas width="600" height="400">{{ buchart }}</canvas>
+
+    </div>
+    <div class="col-md-6 col-sm-12 chartdiv">
+        <div style="text-align: center">Location - Events</div>
+        <canvas #canvas1 width="600" height="400">{{ locationchart }}</canvas>
+    </div>
+  </div>
+
+  <div style="width:60%; text-align: center;margin: 0 auto; margin-top: 30px" class="row chartdiv">
+    <div style="margin: 0 auto" class="col-md-12 col-sm-12 chartdiv">
+      <div style="margin: 0 auto;text-align: center">Designation - People</div>
+      <canvas #canvas2 width="800" height="500">{{ designationchart }}</canvas>
+    </div>
+  </div>
+
+</div>

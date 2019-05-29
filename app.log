@@ -1,0 +1,7 @@
+Starting up http-server, serving dist/
+Available on:
+  http://172.18.4.50:4200
+  http://127.0.0.1:4200
+Hit CTRL-C to stop the server
+http-server stopped.
+Terminate batch job (Y/N)? Terminate batch job (Y/N)? 

@@ -1,0 +1,51 @@
+<div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/dashboard"><h5>{{title}}</h5></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/administration">Administration</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/reports">Reports</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+<!-- <div *ngIf="!loggedIn" class="login col-sm-12 col-md-6 col-lg-6">
+  <form (ngSubmit) = 'login()' #loginForm>
+  <mat-card>
+    <mat-card-title>Cognizant Outreach</mat-card-title>
+    <mat-card-subtitle>Login</mat-card-subtitle>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" [formControl]="username">
+        <mat-error *ngIf="username.invalid">{{getUsernameErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" [formControl]="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+        <button type="submit" [disabled]="username.invalid || password.invalid" mat-raised-button color="primary">Login</button>
+    </div>
+  </mat-card>
+  </form>
+</div> -->
+
+<router-outlet></router-outlet>

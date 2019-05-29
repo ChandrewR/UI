@@ -1,0 +1,56 @@
+div {
+    font-family: 'Montserrat', sans-serif;
+}
+
+table {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+ td, th {
+    width: 30%;
+} 
+
+.tablecls {
+    margin: 2% auto;
+    width: 98%;
+}
+
+.accordiandiv {
+    margin: 2% auto;
+    width: 98%;
+}
+
+.matcarddiv {
+    margin: 2% auto;
+    width: 90%;
+}
+
+.outermatcard {
+    box-shadow: 3px 4px 16px 1px black;
+}
+
+.chartdiv {
+    margin-top :3%;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color:  #3f51b5!important;
+}
+
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    /* color: inherit;
+    background-color: rgba(0,0,0,.03); */
+    color: #fff;
+    background-color:  #3f51b5!important;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
